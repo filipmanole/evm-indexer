@@ -1,0 +1,16 @@
+{
+  "name": "events-scraper",
+  "version": "0.0.0",
+  "private": "true",
+  "main": "index.js",
+  "author": "Filip Manole",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "@tsconfig/node22": "^22",
+    "typescript": "^5.7.3"
+  }
+}

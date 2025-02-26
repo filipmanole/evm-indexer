@@ -1,0 +1,14 @@
+{
+  "name": "@events-scraper/core",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {},
+  "exports": {
+    "./*": [
+      "./src/*/index.ts",
+      "./src/*.ts"
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
