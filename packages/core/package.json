@@ -1,5 +1,5 @@
 {
-  "name": "@events-scraper/core",
+  "name": "@evm-indexer/core",
   "type": "module",
   "version": "0.0.0",
   "scripts": {},

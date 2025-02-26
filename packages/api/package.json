@@ -1,9 +1,9 @@
 {
-  "name": "@events-scraper/api",
+  "name": "@evm-indexer/api",
   "version": "0.0.0",
   "type": "module",
   "dependencies": {
-    "@events-scrapper/core": "*"
+    "@evm-indexer/core": "*"
   },
   "devDependencies": {}
 }

@@ -1,5 +1,5 @@
 {
-  "name": "events-scraper",
+  "name": "evm-indexer",
   "version": "0.0.0",
   "private": "true",
   "main": "index.js",

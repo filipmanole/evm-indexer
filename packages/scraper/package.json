@@ -1,5 +1,5 @@
 {
-  "name": "@events-scraper/scraper",
+  "name": "@evm-indexer/scraper",
   "version": "0.0.0",
   "main": "index.js",
   "author": "Filip Manole",
