@@ -1,7 +1,16 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist" // Output directory for this package
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "target": "es2017",
+    "moduleResolution": "node",
+    "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitAny": true
   },
-  "include": ["src/**/*"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

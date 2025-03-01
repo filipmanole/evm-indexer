@@ -1,8 +1,13 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "./src", // Root directory for this package
-    "outDir": "./dist" // Output directory for this package
-  },
-  "include": ["src/**/*"]
+    "outDir": "./dist", // where to put the compiled JS files
+    "sourceMap": true,
+    "target": "es2017", // which level of JS support to target
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": true
+  }
 }

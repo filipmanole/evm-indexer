@@ -1,7 +1,6 @@
+import { FeeCollector__factory } from "lifi-contract-typings";
 import { ethers } from "ethers";
-import { FeeCollector__factory } from "@evm-indexer/core/lifi-contract-types";
-import { FeeCollectedEventModel } from "./models/fee-collected-events";
-import { LastBlockModel } from "./models/last-block";
+import { FeeCollectedEventModel, LastBlockModel } from "./models";
 
 interface ScraperConfig {
   rpcUrl: string;
