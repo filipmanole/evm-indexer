@@ -8,7 +8,10 @@
   "workspaces": [
     "packages/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "rm -fr packages/**/dist && yarn workspaces run build",
+    "start:scraper": "yarn workspace @evm-indexer/scraper start"
+  },
   "dependencies": {
     "@typegoose/typegoose": "^12.11.0",
     "ethers": "5",

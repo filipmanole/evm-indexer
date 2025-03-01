@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "outDir": "./dist",
     "sourceMap": true,
     "target": "ES2017",
     "moduleResolution": "node",
