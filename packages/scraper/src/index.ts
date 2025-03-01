@@ -13,8 +13,7 @@ async function main() {
     initialBlock: 68_515_067,
   });
 
-  console.log("LOG");
-  // await scraper.start();
+  await scraper.start();
 }
 
 main().catch((error) => {

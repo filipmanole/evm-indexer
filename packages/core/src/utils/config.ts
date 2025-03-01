@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const EnvSchema = z.object({
   NODE_ENV: z.enum(["prod", "dev"]).default("dev"),
-  MONGODB_URI: z.string().default("mongodb://localhost:27017/evm-indexer"),
+  MONGODB_URI: z.string().default(`mongodb://root:root@localhost:27017/`),
   POLYGON_RPC: z.string().default("https://polygon-rpc.com"),
   SCRAPER_INTERVAL_MS: z.coerce.number().min(1000).default(15_000),
   CONFIRMATION_BLOCKS: z.coerce.number().min(5).default(15),

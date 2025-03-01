@@ -1,6 +1,11 @@
-import { FeeCollector__factory } from "lifi-contract-typings";
 import { ethers } from "ethers";
-import { FeeCollectedEventModel, LastBlockModel } from "@evm-indexer/core";
+import { FeeCollector__factory } from "lifi-contract-typings";
+import {
+  config,
+  FeeCollectedEventModel,
+  LastBlockModel,
+} from "@evm-indexer/core";
+import mongoose from "mongoose";
 
 interface ScraperConfig {
   rpcUrl: string;
@@ -28,11 +33,14 @@ export class EventScraper {
   }
 
   async start() {
+    let db: mongoose.Mongoose | undefined;
     try {
+      db = await mongoose.connect(config.MONGODB_URI);
       await this.initializeLastBlock();
-      // await this.processHistoricalBlocks();
+      await this.processHistoricalBlocks();
       // this.startPolling();
     } catch (error) {
+      db?.disconnect();
       console.error("Failed to initialize scraper:", error);
       process.exit(1);
     }
