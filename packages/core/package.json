@@ -1,14 +1,13 @@
 {
   "name": "@evm-indexer/core",
-  "type": "module",
   "version": "0.0.0",
-  "scripts": {},
-  "exports": {
-    "./*": [
-      "./src/*/index.ts",
-      "./src/*.ts"
-    ]
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "exports": {
+    "./db": "./src/db/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./lifi-contract-types": "./src/lifi-contract-types/index.ts"
+  }
 }

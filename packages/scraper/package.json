@@ -2,7 +2,10 @@
   "name": "@evm-indexer/scraper",
   "version": "0.0.0",
   "main": "index.js",
-  "scripts": {},
+  "type": "module",
+  "scripts": {
+    "start": "tsx ./src/main"
+  },
   "dependencies": {
     "@evm-indexer/core": "*"
   },
