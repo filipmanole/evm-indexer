@@ -1,7 +1,1 @@
-{
-  "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "baseUrl": "."
-  }
-}
+{}

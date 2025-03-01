@@ -1,16 +1,5 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "outDir": "./dist",
-    "sourceMap": true,
-    "target": "ES2017",
-    "moduleResolution": "node",
-    "strict": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "noImplicitAny": true
-  },
+  "extends": "../../tsconfig.base.json",
   "include": ["src", "index.ts"],
   "exclude": ["node_modules"]
 }

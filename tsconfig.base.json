@@ -1,21 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ESNext", // Use latest ECMAScript features
-    "module": "ESNext", // Use ES modules
-    "moduleResolution": "node", // Resolve modules in a Node.js-compatible way
-    "experimentalDecorators": true, // Enable decorators
-    "emitDecoratorMetadata": true, // Emit metadata for decorators
-    "strict": true, // Enable strict type checking
-    "esModuleInterop": true, // Allow interop with commonjs modules
-    "skipLibCheck": true, // Skip library type checking
-    "resolveJsonModule": true, // Allow importing JSON files
-    "baseUrl": "." // Base directory for resolving paths
-    // "paths": {
-    //   "@evm-indexer/core/*": ["packages/core/*"],
-    //   "@evm-indexer/scraper/*": ["packages/scraper/*"]
-    // }
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "target": "ES2017",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
-  "include": [
-    "packages/*/src/**/*" // Include all the src files from all packages
-  ]
+  "include": ["packages/*/src/**/*"]
 }

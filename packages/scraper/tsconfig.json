@@ -1,18 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "module": "CommonJS",
-    "esModuleInterop": true,
-    "outDir": "./dist",
-    "sourceMap": true,
-    "target": "es2017",
-    "moduleResolution": "node",
-    "strict": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "noImplicitAny": true,
-    "allowSyntheticDefaultImports": true
-  },
   "include": ["src", "src/index.ts"],
   "exclude": ["node_modules"]
 }
