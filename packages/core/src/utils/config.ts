@@ -6,6 +6,9 @@ const EnvSchema = z.object({
   POLYGON_RPC: z.string().default("https://polygon-rpc.com"),
   SCRAPER_INTERVAL_MS: z.coerce.number().min(1000).default(15_000),
   CONFIRMATION_BLOCKS: z.coerce.number().min(5).default(15),
+  CONTRACT_ADDRESS: z
+    .string()
+    .default("0xbD6C7B0d2f68c2b7805d88388319cfB6EcB50eA9"),
 });
 
 export type EnvConfig = z.infer<typeof EnvSchema>;
