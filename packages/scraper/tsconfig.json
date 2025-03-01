@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "module": "CommonJS",
     "esModuleInterop": true,
@@ -9,8 +10,9 @@
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
+  "include": ["src", "src/index.ts"],
   "exclude": ["node_modules"]
 }

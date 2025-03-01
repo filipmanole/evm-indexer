@@ -1,5 +1,5 @@
 import { mongoose } from "@typegoose/typegoose";
-import { config } from "../utils";
+import { config } from "../utils/config";
 
 export const connectToMongoDB = async () => {
   try {

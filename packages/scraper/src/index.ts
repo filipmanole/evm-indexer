@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { config } from "./config";
+import { config } from "@evm-indexer/core";
 import { EventScraper } from "./scraper.service";
 
 async function main() {

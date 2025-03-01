@@ -9,11 +9,11 @@
     "esModuleInterop": true, // Allow interop with commonjs modules
     "skipLibCheck": true, // Skip library type checking
     "resolveJsonModule": true, // Allow importing JSON files
-    "baseUrl": ".", // Base directory for resolving paths
-    "paths": {
-      "@evm-indexer/core/*": ["packages/core/src/*"],
-      "@evm-indexer/scraper/*": ["packages/scraper/src/*"]
-    }
+    "baseUrl": "." // Base directory for resolving paths
+    // "paths": {
+    //   "@evm-indexer/core/*": ["packages/core/*"],
+    //   "@evm-indexer/scraper/*": ["packages/scraper/*"]
+    // }
   },
   "include": [
     "packages/*/src/**/*" // Include all the src files from all packages

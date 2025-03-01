@@ -2,7 +2,9 @@
   "name": "@evm-indexer/api",
   "version": "0.0.0",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@evm-indexer/core": "*"
   },

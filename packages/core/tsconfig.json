@@ -1,13 +1,16 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist", // where to put the compiled JS files
-    "sourceMap": true,
-    "target": "es2017", // which level of JS support to target
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "esModuleInterop": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "target": "ES2017",
+    "moduleResolution": "node",
     "strict": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noImplicitAny": true
-  }
+  },
+  "include": ["src", "index.ts"],
+  "exclude": ["node_modules"]
 }

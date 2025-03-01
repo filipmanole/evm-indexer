@@ -5,22 +5,10 @@
   "type": "commonjs",
   "scripts": {
     "build": "rm -fr dist && tsc",
-    "start": "node ./dist/scraper/index.js",
-    "dev": "node dist/index.js"
+    "start": "node ./dist/index.js"
   },
   "dependencies": {
-    "@typegoose/typegoose": "^12.11.0",
-    "ethers": "5",
-    "lifi-contract-typings": "lifinance/lifi-contract-types",
-    "mongoose": "^8.10.2",
-    "reflect-metadata": "^0.1.13",
-    "zod": "^3.24.2"
+    "@evm-indexer/core": "*"
   },
-  "devDependencies": {
-    "@tsconfig/node22": "^22",
-    "@types/node": "^22.13.5",
-    "ts-node": "^10.9.2",
-    "tsx": "^4.19.3",
-    "typescript": "^5.7.3"
-  }
+  "devDependencies": {}
 }

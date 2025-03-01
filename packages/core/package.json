@@ -1,13 +1,11 @@
 {
   "name": "@evm-indexer/core",
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc"
   },
   "exports": {
-    "./db": "./src/db/index.ts",
-    "./utils": "./src/utils/index.ts",
-    "./lifi-contract-types": "./src/lifi-contract-types/index.ts"
+    ".": "./dist/index.js"
   }
 }
