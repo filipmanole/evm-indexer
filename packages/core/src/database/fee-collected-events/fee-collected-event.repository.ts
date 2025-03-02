@@ -1,7 +1,7 @@
 import {
   FeeCollectedEvent,
   FeeCollectedEventModel,
-} from "./fee-collected-events.model";
+} from "./fee-collected-event.model";
 
 export class FeeCollectedEventRepository {
   async insertMany(events: FeeCollectedEvent[]): Promise<FeeCollectedEvent[]> {

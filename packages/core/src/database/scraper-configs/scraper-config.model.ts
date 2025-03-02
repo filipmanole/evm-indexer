@@ -3,16 +3,22 @@ import { prop, getModelForClass, modelOptions } from "@typegoose/typegoose";
 
 @modelOptions({
   schemaOptions: {
-    collection: "last_processed_blocks",
+    collection: "scraper_configs",
     timestamps: true,
   },
 })
-export class LastBlock {
+export class ScraperConfig {
   @prop({ required: true, unique: true })
   public chainId!: number;
+
+  @prop({ required: true })
+  public contractAddress!: number;
+
+  @prop({ required: true })
+  public providerUri!: string;
 
   @prop({ required: true })
   public lastBlock!: number;
 }
 
-export const LastBlockModel = getModelForClass(LastBlock);
+export const ScraperConfigModel = getModelForClass(ScraperConfig);

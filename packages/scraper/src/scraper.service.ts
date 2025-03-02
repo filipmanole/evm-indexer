@@ -3,7 +3,7 @@ import { FeeCollector__factory } from "lifi-contract-typings";
 import {
   config,
   FeeCollectedEventRepository,
-  LastBlockRepository,
+  ScraperConfigRepository,
 } from "@evm-indexer/core";
 
 export class EventScraper {
@@ -13,7 +13,7 @@ export class EventScraper {
   #provider: ethers.providers.JsonRpcProvider;
   #contract: ethers.Contract;
   #feeCollectedEventRepository: FeeCollectedEventRepository;
-  #lastBlockRepository: LastBlockRepository;
+  #scraperConfigRepository: ScraperConfigRepository;
 
   constructor(
     private readonly rpcUrl: string,
@@ -26,7 +26,7 @@ export class EventScraper {
       this.#provider
     );
     this.#feeCollectedEventRepository = new FeeCollectedEventRepository();
-    this.#lastBlockRepository = new LastBlockRepository();
+    this.#scraperConfigRepository = new ScraperConfigRepository();
   }
 
   async processNextBatch(): Promise<void> {
@@ -53,7 +53,7 @@ export class EventScraper {
       const events = await this.#loadEvents(lastProcessedBlock + 1, toBlock);
 
       await this.#saveEvents(events);
-      await this.#lastBlockRepository.updateForChainId(this.CHAIN_ID, {
+      await this.#scraperConfigRepository.updateForChainId(this.CHAIN_ID, {
         lastBlock: toBlock,
       });
 
@@ -108,7 +108,7 @@ export class EventScraper {
   }
 
   async #getLastProcessedBlock(chainId: number): Promise<number> {
-    const doc = await this.#lastBlockRepository.findByChainId(chainId);
+    const doc = await this.#scraperConfigRepository.findByChainId(chainId);
     return doc?.lastBlock ?? config.OLDEST_BLOCK;
   }
 }
