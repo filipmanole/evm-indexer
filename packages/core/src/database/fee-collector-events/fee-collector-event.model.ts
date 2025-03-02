@@ -20,7 +20,7 @@ import {
   },
   { unique: true }
 )
-export class FeeCollectedEvent {
+export class FeeCollectorEvent {
   @prop({ required: true })
   public chainId!: number;
 
@@ -46,4 +46,4 @@ export class FeeCollectedEvent {
   public timestamp!: Date;
 }
 
-export const FeeCollectedEventModel = getModelForClass(FeeCollectedEvent);
+export const FeeCollectorEventModel = getModelForClass(FeeCollectorEvent);

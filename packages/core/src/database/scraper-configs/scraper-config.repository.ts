@@ -26,3 +26,5 @@ export class ScraperConfigRepository {
     return res;
   }
 }
+
+export const scraperConfigRepository = new ScraperConfigRepository();

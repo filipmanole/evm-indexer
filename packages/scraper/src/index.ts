@@ -1,14 +1,14 @@
 import cron from "node-cron";
 import mongoose from "mongoose";
 import { EventScraper } from "./scraper.service";
-import { config, ScraperConfigModel } from "@evm-indexer/core";
+import { config, scraperConfigRepository } from "@evm-indexer/core";
 
 cron.schedule("* * * * *", async () => {
   let dbConnection: mongoose.Mongoose | undefined;
   try {
     dbConnection = await mongoose.connect(config.MONGODB_URI);
 
-    const scraperConfigs = await ScraperConfigModel.find();
+    const scraperConfigs = await scraperConfigRepository.listScraperConfigs();
 
     if (scraperConfigs.length === 0) {
       console.error("No chain configurations existing. Skipping...");

@@ -13,9 +13,12 @@
     "start:scraper": "yarn workspace @evm-indexer/scraper start"
   },
   "dependencies": {
+    "@fastify/cors": "^11.0.0",
+    "@fastify/mongodb": "^9.0.2",
     "@typegoose/typegoose": "^12.11.0",
     "@types/node-cron": "^3.0.11",
     "ethers": "5",
+    "fastify": "^5.2.1",
     "lifi-contract-typings": "github:lifinance/lifi-contract-types",
     "mongoose": "^8.10.2",
     "node-cron": "^3.0.3",

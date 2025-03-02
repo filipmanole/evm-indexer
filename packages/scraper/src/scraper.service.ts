@@ -2,7 +2,9 @@ import { BigNumber, ethers } from "ethers";
 import { FeeCollector__factory } from "lifi-contract-typings";
 import {
   config,
-  FeeCollectedEventRepository,
+  feeCollectorEventRepository,
+  FeeCollectorEventRepository,
+  scraperConfigRepository,
   ScraperConfigRepository,
 } from "@evm-indexer/core";
 
@@ -17,7 +19,7 @@ export class EventScraper {
   #provider: ethers.providers.JsonRpcProvider;
   #contract: ethers.Contract;
 
-  #feeCollectedEventRepository: FeeCollectedEventRepository;
+  #feeCollectedEventRepository: FeeCollectorEventRepository;
   #scraperConfigRepository: ScraperConfigRepository;
 
   constructor(params: ScraperConfig) {
@@ -29,8 +31,8 @@ export class EventScraper {
       FeeCollector__factory.createInterface(),
       this.#provider
     );
-    this.#feeCollectedEventRepository = new FeeCollectedEventRepository();
-    this.#scraperConfigRepository = new ScraperConfigRepository();
+    this.#feeCollectedEventRepository = feeCollectorEventRepository;
+    this.#scraperConfigRepository = scraperConfigRepository;
   }
 
   async processNextBatch(chunkSize: number): Promise<void> {
