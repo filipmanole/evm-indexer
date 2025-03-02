@@ -31,7 +31,7 @@ services:
   scraper:
     build:
       context: .
-      dockerfile: Dockerfile.draft
+      dockerfile: Dockerfile
       target: scraper
     container_name: scraper
     depends_on:
