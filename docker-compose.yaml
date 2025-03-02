@@ -44,3 +44,16 @@ services:
       CONTRACT_ADDRESS: ${CONTRACT_ADDRESS}
       CONFIRMATION_BLOCKS: ${CONFIRMATION_BLOCKS}
       OLDEST_BLOCK: ${OLDEST_BLOCK}
+
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     target: api
+  #   container_name: api
+  #   depends_on:
+  #     - mongo
+  #     - mongo-express
+  #   restart: always
+  #   environment:
+  #     MONGODB_URI: "mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:${MONGO_PORT}/"

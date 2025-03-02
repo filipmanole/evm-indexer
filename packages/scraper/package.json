@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "build": "rm -fr dist && tsc",
+    "build": "tsc",
     "start": "node ./dist/index.js"
   },
   "dependencies": {

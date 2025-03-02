@@ -1,39 +1,37 @@
 import cron from "node-cron";
-import { EventScraper } from "./scraper.service";
-import { config } from "@evm-indexer/core";
 import mongoose from "mongoose";
-
-const scraper = new EventScraper(config.POLYGON_RPC, config.CONTRACT_ADDRESS);
+import { EventScraper } from "./scraper.service";
+import { config, ScraperConfigModel } from "@evm-indexer/core";
 
 cron.schedule("* * * * *", async () => {
   let dbConnection: mongoose.Mongoose | undefined;
   try {
     dbConnection = await mongoose.connect(config.MONGODB_URI);
-    await scraper.processNextBatch();
+
+    const scraperConfigs = await ScraperConfigModel.find();
+
+    if (scraperConfigs.length === 0) {
+      console.error("No chain configurations existing. Skipping...");
+      return;
+    }
+
+    for (const config of scraperConfigs) {
+      try {
+        const { isActive, chunkSize } = config.settings;
+
+        if (isActive) {
+          const scraper = new EventScraper(config);
+          await scraper.processNextBatch(chunkSize);
+        } else {
+          console.warn(`Skipping inactive scraper for chain ${config.chainId}`);
+        }
+      } catch (error) {
+        console.error(`Error on chain ${config.chainId}`, error);
+      }
+    }
   } catch (error) {
     console.error("Cronjob failed:", error);
   } finally {
     dbConnection?.disconnect();
   }
 });
-
-// async function run() {
-//   const scraper = new EventScraper(config.POLYGON_RPC, config.CONTRACT_ADDRESS);
-
-//   try {
-//     // Connect to MongoDB first
-//     await mongoose.connect(config.MONGODB_URI);
-//     console.log("MongoDB connected");
-
-//     // Run the scraper process
-//     await scraper.processNextBatch();
-//   } catch (error) {
-//     console.error("Error:", error);
-//   } finally {
-//     // Disconnect after everything completes
-//     await mongoose.disconnect();
-//     console.log("MongoDB disconnected");
-//   }
-// }
-
-// run();

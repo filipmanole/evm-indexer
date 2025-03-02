@@ -1,6 +1,10 @@
 import { ScraperConfig, ScraperConfigModel } from "./scraper-config.model";
 
 export class ScraperConfigRepository {
+  async listScraperConfigs(): Promise<ScraperConfig[]> {
+    return ScraperConfigModel.find();
+  }
+
   async findByChainId(chainId: number): Promise<ScraperConfig | null> {
     const res = await ScraperConfigModel.findOne({ chainId });
 

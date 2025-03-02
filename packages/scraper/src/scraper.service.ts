@@ -6,22 +6,26 @@ import {
   ScraperConfigRepository,
 } from "@evm-indexer/core";
 
-export class EventScraper {
-  private readonly CHUNK_SIZE = 2000;
-  private readonly CHAIN_ID = 137;
+type ScraperConfig = {
+  chainId: number;
+  contractAddress: string;
+  providerUri: string;
+};
 
+export class EventScraper {
+  #chainId: number;
   #provider: ethers.providers.JsonRpcProvider;
   #contract: ethers.Contract;
+
   #feeCollectedEventRepository: FeeCollectedEventRepository;
   #scraperConfigRepository: ScraperConfigRepository;
 
-  constructor(
-    private readonly rpcUrl: string,
-    private readonly contractAddress: string
-  ) {
-    this.#provider = new ethers.providers.JsonRpcProvider(this.rpcUrl);
+  constructor(params: ScraperConfig) {
+    const { chainId, contractAddress, providerUri } = params;
+    this.#chainId = chainId;
+    this.#provider = new ethers.providers.JsonRpcProvider(providerUri);
     this.#contract = new ethers.Contract(
-      this.contractAddress,
+      contractAddress,
       FeeCollector__factory.createInterface(),
       this.#provider
     );
@@ -29,10 +33,10 @@ export class EventScraper {
     this.#scraperConfigRepository = new ScraperConfigRepository();
   }
 
-  async processNextBatch(): Promise<void> {
+  async processNextBatch(chunkSize: number): Promise<void> {
     try {
       const [lastProcessedBlock, currentBlock] = await Promise.all([
-        this.#getLastProcessedBlock(this.CHAIN_ID),
+        this.#getLastProcessedBlock(this.#chainId),
         this.#provider
           .getBlockNumber()
           .then((b) => b - config.CONFIRMATION_BLOCKS),
@@ -43,17 +47,14 @@ export class EventScraper {
         return;
       }
 
-      const toBlock = Math.min(
-        lastProcessedBlock + this.CHUNK_SIZE,
-        currentBlock
-      );
+      const toBlock = Math.min(lastProcessedBlock + chunkSize, currentBlock);
 
       console.info(`Processing blocks ${lastProcessedBlock + 1}-${toBlock}`);
 
       const events = await this.#loadEvents(lastProcessedBlock + 1, toBlock);
 
       await this.#saveEvents(events);
-      await this.#scraperConfigRepository.updateForChainId(this.CHAIN_ID, {
+      await this.#scraperConfigRepository.updateForChainId(this.#chainId, {
         lastBlock: toBlock,
       });
 
@@ -74,7 +75,7 @@ export class EventScraper {
         const block = await event.getBlock();
 
         return {
-          chainId: this.CHAIN_ID,
+          chainId: this.#chainId,
           token: parsed.args[0],
           integrator: parsed.args[1],
           integratorFee: BigNumber.from(parsed.args[2]),

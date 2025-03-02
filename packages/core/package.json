@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "type": "commonjs",
   "scripts": {
-    "build": "rm -fr dist && tsc"
+    "build": "tsc"
   },
   "exports": {
     ".": "./dist/index.js"
