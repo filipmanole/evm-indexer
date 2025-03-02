@@ -10,13 +10,15 @@
   ],
   "scripts": {
     "build": "rm -fr packages/**/dist && yarn workspaces run build",
-    "start:scraper": "yarn workspace @evm-indexer/scraper start"
+    "start:scraper": "yarn build && yarn workspace @evm-indexer/scraper start"
   },
   "dependencies": {
     "@typegoose/typegoose": "^12.11.0",
+    "@types/node-cron": "^3.0.11",
     "ethers": "5",
     "lifi-contract-typings": "github:lifinance/lifi-contract-types",
     "mongoose": "^8.10.2",
+    "node-cron": "^3.0.3",
     "reflect-metadata": "^0.1.13",
     "zod": "^3.24.2"
   },

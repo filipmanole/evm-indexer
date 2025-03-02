@@ -1,22 +1,38 @@
-import "reflect-metadata";
-import { config } from "@evm-indexer/core";
+import cron from "node-cron";
 import { EventScraper } from "./scraper.service";
+import { config } from "@evm-indexer/core";
+import mongoose from "mongoose";
 
-async function main() {
-  const scraper = new EventScraper({
-    rpcUrl: config.POLYGON_RPC,
-    contractAddress: config.CONTRACT_ADDRESS,
-    chainId: 137,
-    chunkSize: 2000,
-    confirmations: 15,
-    // initialBlock: 61_500_000,
-    initialBlock: 68_515_067,
-  });
+const scraper = new EventScraper(config.POLYGON_RPC, config.CONTRACT_ADDRESS);
 
-  await scraper.start();
-}
-
-main().catch((error) => {
-  console.error("Application failed to start:", error);
-  process.exit(1);
+cron.schedule("* * * * *", async () => {
+  const db = await mongoose.connect(config.MONGODB_URI);
+  try {
+    await scraper.processNextBatch();
+  } catch (error) {
+    console.error("Cronjob failed:", error);
+  } finally {
+    db.disconnect();
+  }
 });
+
+// async function run() {
+//   const scraper = new EventScraper(config.POLYGON_RPC, config.CONTRACT_ADDRESS);
+
+//   try {
+//     // Connect to MongoDB first
+//     await mongoose.connect(config.MONGODB_URI);
+//     console.log("MongoDB connected");
+
+//     // Run the scraper process
+//     await scraper.processNextBatch();
+//   } catch (error) {
+//     console.error("Error:", error);
+//   } finally {
+//     // Disconnect after everything completes
+//     await mongoose.disconnect();
+//     console.log("MongoDB disconnected");
+//   }
+// }
+
+// run();
