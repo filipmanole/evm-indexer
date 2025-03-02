@@ -1,0 +1,13 @@
+{
+  "name": "@evm-indexer/scripts",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@evm-indexer/core": "*"
+  },
+  "scripts": {
+    "build": "echo nothing to build",
+    "db:seed:scraper-config": "tsx ./src/seed-scraper-config"
+  },
+  "devDependencies": {}
+}

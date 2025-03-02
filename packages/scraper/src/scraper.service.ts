@@ -4,8 +4,6 @@ import {
   config,
   feeCollectorEventRepository,
   FeeCollectorEventRepository,
-  scraperConfigRepository,
-  ScraperConfigRepository,
 } from "@evm-indexer/core";
 
 type ScraperConfig = {
@@ -20,7 +18,6 @@ export class EventScraper {
   #contract: ethers.Contract;
 
   #feeCollectedEventRepository: FeeCollectorEventRepository;
-  #scraperConfigRepository: ScraperConfigRepository;
 
   constructor(params: ScraperConfig) {
     const { chainId, contractAddress, providerUri } = params;
@@ -32,35 +29,31 @@ export class EventScraper {
       this.#provider
     );
     this.#feeCollectedEventRepository = feeCollectorEventRepository;
-    this.#scraperConfigRepository = scraperConfigRepository;
   }
 
-  async processNextBatch(chunkSize: number): Promise<void> {
+  async processNextBatch(
+    lastBlock: number,
+    chunkSize: number
+  ): Promise<number> {
     try {
-      const [lastProcessedBlock, currentBlock] = await Promise.all([
-        this.#getLastProcessedBlock(this.#chainId),
-        this.#provider
-          .getBlockNumber()
-          .then((b) => b - config.CONFIRMATION_BLOCKS),
-      ]);
+      const currentBlock = await this.#provider
+        .getBlockNumber()
+        .then((b) => b - config.CONFIRMATION_BLOCKS);
 
-      if (lastProcessedBlock >= currentBlock) {
+      if (lastBlock >= currentBlock) {
         console.info("No new blocks to process");
-        return;
+        return lastBlock;
       }
 
-      const toBlock = Math.min(lastProcessedBlock + chunkSize, currentBlock);
+      const toBlock = Math.min(lastBlock + chunkSize, currentBlock);
 
-      console.info(`Processing blocks ${lastProcessedBlock + 1}-${toBlock}`);
+      console.info(`Processing blocks ${lastBlock + 1}-${toBlock}`);
 
-      const events = await this.#loadEvents(lastProcessedBlock + 1, toBlock);
-
+      const events = await this.#loadEvents(lastBlock + 1, toBlock);
       await this.#saveEvents(events);
-      await this.#scraperConfigRepository.updateForChainId(this.#chainId, {
-        lastBlock: toBlock,
-      });
 
       console.info(`Successfully processed up to block ${toBlock}`);
+      return toBlock;
     } catch (error) {
       console.error("Error processing batch:", error);
       throw error;
@@ -108,10 +101,5 @@ export class EventScraper {
         throw error;
       }
     }
-  }
-
-  async #getLastProcessedBlock(chainId: number): Promise<number> {
-    const doc = await this.#scraperConfigRepository.findByChainId(chainId);
-    return doc?.lastBlock ?? config.OLDEST_BLOCK;
   }
 }

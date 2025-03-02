@@ -2,7 +2,12 @@ import { z } from "zod";
 
 const EnvSchema = z.object({
   MONGODB_URI: z.string().default(`mongodb://root:root@localhost:27017/`),
-  API_PORT: z.coerce.number().default(3000),
+  POLYGON_RPC: z.string().default("https://polygon-rpc.com"),
+  CONTRACT_ADDRESS: z
+    .string()
+    .default("0xbD6C7B0d2f68c2b7805d88388319cfB6EcB50eA9"),
+  CONFIRMATION_BLOCKS: z.coerce.number().default(15),
+  OLDEST_BLOCK: z.coerce.number().default(61_500_000),
   MONGO_DATABASE: z.string().default("scraper"),
 });
 
@@ -12,7 +17,10 @@ const loadConfig = (env: NodeJS.ProcessEnv): EnvConfig => {
   try {
     return EnvSchema.parse({
       MONGODB_URI: env.MONGODB_URI,
-      API_PORT: env.API_PORT,
+      POLYGON_RPC: env.POLYGON_RPC,
+      CONTRACT_ADDRESS: env.CONTRACT_ADDRESS,
+      CONFIRMATION_BLOCKS: env.CONFIRMATION_BLOCKS,
+      OLDEST_BLOCK: env.OLDEST_BLOCK,
       MONGO_DATABASE: env.MONGO_DATABASE,
     });
   } catch (error) {

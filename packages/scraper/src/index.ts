@@ -6,7 +6,9 @@ import { config, scraperConfigRepository } from "@evm-indexer/core";
 cron.schedule("* * * * *", async () => {
   let dbConnection: mongoose.Mongoose | undefined;
   try {
-    dbConnection = await mongoose.connect(config.MONGODB_URI);
+    dbConnection = await mongoose.connect(config.MONGODB_URI, {
+      dbName: config.MONGO_DATABASE,
+    });
 
     const scraperConfigs = await scraperConfigRepository.listScraperConfigs();
 
@@ -21,7 +23,13 @@ cron.schedule("* * * * *", async () => {
 
         if (isActive) {
           const scraper = new EventScraper(config);
-          await scraper.processNextBatch(chunkSize);
+          const lastProcesedBlock = await scraper.processNextBatch(
+            config.lastBlock,
+            chunkSize
+          );
+          await scraperConfigRepository.updateForChainId(config.chainId, {
+            lastBlock: lastProcesedBlock,
+          });
         } else {
           console.warn(`Skipping inactive scraper for chain ${config.chainId}`);
         }

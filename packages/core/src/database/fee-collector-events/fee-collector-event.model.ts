@@ -7,7 +7,7 @@ import {
 
 @modelOptions({
   schemaOptions: {
-    collection: "fee_collected_events",
+    collection: "fee_collector_events",
     timestamps: true,
   },
 })
