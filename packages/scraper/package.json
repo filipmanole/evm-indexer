@@ -2,7 +2,13 @@
   "name": "@evm-indexer/scraper",
   "version": "0.0.0",
   "main": "index.js",
-  "author": "Filip Manole",
-  "license": "MIT",
-  "scripts": {}
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
+  "dependencies": {
+    "@evm-indexer/core": "*"
+  },
+  "devDependencies": {}
 }

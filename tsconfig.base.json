@@ -1,7 +1,16 @@
 {
-  "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "Bundler"
-  }
+    "module": "CommonJS",
+    "sourceMap": true,
+    "target": "ES2017",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
+  },
+  "include": ["packages/*/src/**/*"]
 }
