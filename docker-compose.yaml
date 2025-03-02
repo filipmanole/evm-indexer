@@ -27,3 +27,20 @@ services:
       ME_CONFIG_MONGODB_URL: "mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:${MONGO_PORT}/"
       ME_CONFIG_BASICAUTH_USERNAME: ${ME_CONFIG_BASICAUTH_USERNAME}
       ME_CONFIG_BASICAUTH_PASSWORD: ${ME_CONFIG_BASICAUTH_PASSWORD}
+
+  scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile.draft
+      target: scraper
+    container_name: scraper
+    depends_on:
+      - mongo
+      - mongo-express
+    restart: always
+    environment:
+      MONGODB_URI: "mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:${MONGO_PORT}/"
+      POLYGON_RPC: ${POLYGON_RPC}
+      CONTRACT_ADDRESS: ${CONTRACT_ADDRESS}
+      CONFIRMATION_BLOCKS: ${CONFIRMATION_BLOCKS}
+      OLDEST_BLOCK: ${OLDEST_BLOCK}

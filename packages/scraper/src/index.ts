@@ -6,13 +6,14 @@ import mongoose from "mongoose";
 const scraper = new EventScraper(config.POLYGON_RPC, config.CONTRACT_ADDRESS);
 
 cron.schedule("* * * * *", async () => {
-  const db = await mongoose.connect(config.MONGODB_URI);
+  let dbConnection: mongoose.Mongoose | undefined;
   try {
+    dbConnection = await mongoose.connect(config.MONGODB_URI);
     await scraper.processNextBatch();
   } catch (error) {
     console.error("Cronjob failed:", error);
   } finally {
-    db.disconnect();
+    dbConnection?.disconnect();
   }
 });
 

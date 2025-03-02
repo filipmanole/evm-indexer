@@ -6,8 +6,8 @@ const EnvSchema = z.object({
   CONTRACT_ADDRESS: z
     .string()
     .default("0xbD6C7B0d2f68c2b7805d88388319cfB6EcB50eA9"),
-  CONFIRMATION_BLOCKS: z.number().default(15),
-  OLDEST_BLOCK: z.number().default(68_534_729),
+  CONFIRMATION_BLOCKS: z.coerce.number().default(15),
+  OLDEST_BLOCK: z.coerce.number().default(68_534_729),
 });
 
 export type EnvConfig = z.infer<typeof EnvSchema>;
