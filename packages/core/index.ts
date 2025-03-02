@@ -1,6 +1,4 @@
-export * from "./src/db/connection";
-
-export * from "./src/db/models/fee-collected-events";
-export * from "./src/db/models/last-block";
+export * from "./src/database/fee-collected-events/fee-collected-events.repository";
+export * from "./src/database/last-block/last-block.repository";
 
 export * from "./src/utils/config";
