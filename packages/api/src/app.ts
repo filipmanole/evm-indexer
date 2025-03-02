@@ -6,7 +6,17 @@ import { feeCollectorEventsRoutes } from "./modules";
 
 const startApp = () => {
   const fastify = Fastify({
-    logger: true,
+    logger: {
+      level: "info",
+      transport: {
+        target: "pino-pretty",
+        options: {
+          colorize: true, // Adds colors to logs
+          translateTime: "HH:MM:ss Z", // Formats timestamps
+          ignore: "pid,hostname", // Hides unnecessary fields
+        },
+      },
+    },
     exposeHeadRoutes: false,
   })
     .register(cors)

@@ -5,6 +5,14 @@ import {
   Severity,
 } from "@typegoose/typegoose";
 
+export class ScraperSettings {
+  @prop({ required: true, default: 2000 })
+  public chunkSize!: number;
+
+  @prop({ required: true, default: true })
+  public isActive!: boolean;
+}
+
 @modelOptions({
   schemaOptions: {
     collection: "scraper_configs",
@@ -33,14 +41,6 @@ export class ScraperConfig {
     default: () => new ScraperSettings(),
   })
   public settings!: ScraperSettings;
-}
-
-export class ScraperSettings {
-  @prop({ required: true, default: 2000 })
-  public chunkSize!: number;
-
-  @prop({ required: true, default: true })
-  public isActive!: boolean;
 }
 
 export const ScraperConfigModel = getModelForClass(ScraperConfig);

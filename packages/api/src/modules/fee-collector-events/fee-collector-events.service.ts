@@ -1,4 +1,3 @@
-import { FastifyRequest, FastifyReply } from "fastify";
 import {
   feeCollectorEventRepository,
   FeeCollectorEventRepository,
@@ -7,12 +6,15 @@ import {
 export class FeeCollectorEventsService {
   #feeCollectorEventsRepository: FeeCollectorEventRepository;
 
-  constructor(userService: FeeCollectorEventRepository) {
-    this.#feeCollectorEventsRepository = userService;
+  constructor(feeCollectorEventsRepository: FeeCollectorEventRepository) {
+    this.#feeCollectorEventsRepository = feeCollectorEventsRepository;
   }
 
-  async list() {
-    const users = await this.#feeCollectorEventsRepository.list();
+  async list(page?: number, limit?: number) {
+    const users = await this.#feeCollectorEventsRepository.list(
+      page ?? 1,
+      limit ?? 10
+    );
     return users;
   }
 }

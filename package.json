@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "build": "rm -fr packages/**/dist && yarn workspaces run build",
-    "start:scraper": "yarn workspace @evm-indexer/scraper start"
+    "start:scraper": "yarn workspace @evm-indexer/scraper start",
+    "start:api": "yarn workspace @evm-indexer/api start"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.0",
@@ -22,6 +23,7 @@
     "lifi-contract-typings": "github:lifinance/lifi-contract-types",
     "mongoose": "^8.10.2",
     "node-cron": "^3.0.3",
+    "pino-pretty": "^13.0.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
