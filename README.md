@@ -45,7 +45,7 @@ docker build --target scraper -t my-scraper .
 
 ## Things to improve
 
-### Add Automated Tests for Scraper and Api
+### **Add Automated Tests for Scraper and Api**
 
 - **Challenge:** Ensuring the scraper and api works as expected across different chains and configurations requires thorough testing.
 - **Solution:** Implement automated tests for scraper and api
@@ -63,8 +63,14 @@ docker build --target scraper -t my-scraper .
 - **Solution:** Use BullMQ to manage distributed scraper jobs, enabling concurrent scraping with job prioritization, retries, and error handling.
 - **Benefit:** Improved task management, faster scraping, and better resource utilization with fault tolerance and parallel processing.
 
-### Add Endpoints for Scraper Configuration Management
+### **Add Endpoints for Scraper Configuration Management**
 
 - **Challenge:** Manually managing scraper configurations can be time-consuming and error-prone.
 - **Solution:** Implement endpoints to add, update, and pause scraper configurations via the API. This allows for more flexible control over which chains to scrape and when to pause scraping operations.
 - **Benefit:** Easier management of scraper configurations, enabling dynamic adjustments to scraping operations without requiring restarts.
+
+### **Improve Logging and Monitoring**
+
+- **Challenge:** Lack of real-time visibility into services performance/errors/logs.
+- **Solution:** Integrate centralized logging and monitoring tools like Prometheus/Grafana/Bull Dashboard.
+- **Benefit:** Enhanced visibility accross services.
