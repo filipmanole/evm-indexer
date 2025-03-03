@@ -33,7 +33,14 @@ Start the containers:
 docker-compose up
 ```
 
-If you want to build the containers separately:
+The scraper will need a configuration:
+
+```bash
+yarn install
+yarn db:seed:scraper-config # seed db with a scraper-config item
+```
+
+### If you want to build the containers separately:
 
 ```bash
 # Build only the API container
