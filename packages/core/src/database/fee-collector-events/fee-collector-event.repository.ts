@@ -8,12 +8,12 @@ export class FeeCollectorEventRepository {
     return await FeeCollectorEventModel.insertMany(events, { ordered: false });
   }
 
-  async list(page: number, limit: number) {
+  async list(integrator: string, page: number, limit: number) {
     const pageNumber = Math.max(1, page);
     const pageSize = Math.max(1, limit);
 
     const [items, total] = await Promise.all([
-      FeeCollectorEventModel.find()
+      FeeCollectorEventModel.find({ integrator })
         .sort({ blockNumber: -1 })
         .skip((pageNumber - 1) * pageSize)
         .limit(pageSize)

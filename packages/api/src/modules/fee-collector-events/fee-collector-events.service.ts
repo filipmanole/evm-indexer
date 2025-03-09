@@ -10,8 +10,9 @@ export class FeeCollectorEventsService {
     this.#feeCollectorEventsRepository = feeCollectorEventsRepository;
   }
 
-  async list(page?: number, limit?: number) {
+  async list(integrator: string, page?: number, limit?: number) {
     const users = await this.#feeCollectorEventsRepository.list(
+      integrator,
       page ?? 1,
       limit ?? 10
     );

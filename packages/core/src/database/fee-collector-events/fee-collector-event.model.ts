@@ -11,7 +11,6 @@ import {
     timestamps: true,
   },
 })
-@index({ chainId: 1, blockNumber: 1 })
 @index({ integrator: 1, timestamp: -1 })
 @index(
   {

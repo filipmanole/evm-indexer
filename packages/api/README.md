@@ -9,7 +9,7 @@ Built with **Fastify**, **Typegoose**, and **Mongoose**, the API ensures efficie
 ### /fee-collector-events/list?page=1&limit=2
 
 ```htttp
-GET /fee-collector-events/list?page=<number>&limit=<number> HTTP/1.1
+GET /fee-collector-events/list?page=<number>&limit=<number>&integrator=<string> HTTP/1.1
 Host: 127.0.0.1:3000
 ```
 
